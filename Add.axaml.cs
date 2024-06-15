@@ -15,7 +15,7 @@ namespace AnyaProject
         //public List<Product> tovars2 = new List<Product>();
         //private User _user;
         private ProductsWindow1 _listupdate;
-        private Bitmap _selectedImage;  // ѕеременна€ дл€ хранени€ выбранного изображени€
+        public Bitmap _selectedImage;  // ѕеременна€ дл€ хранени€ выбранного изображени€
 
         public Add()
         {

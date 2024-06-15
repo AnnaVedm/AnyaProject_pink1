@@ -119,7 +119,11 @@
 						 CornerRadius="10"
 						 Margin="65 0 0 0"/>
 			</StackPanel>
-			
+			<StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="6" 
+						Margin="200 0 5 0">
+				<Button Content="Изменить изображение"
+						Click="SelectImageButton_Click1"/>
+			</StackPanel>
 			<TextBlock Text=""
 					   Name="TadaText"
 					   Grid.Row="6"

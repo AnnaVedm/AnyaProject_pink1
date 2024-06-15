@@ -130,8 +130,11 @@
 					   FontSize="25"
 					   IsVisible="True"/>
 
-			<StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="6" >
-				<Button Content="Выбрать изображение" Click="SelectImageButton_Click"/>
+			<StackPanel Orientation="Horizontal" 
+						Grid.Column="1" 
+						Grid.Row="6" >
+				<Button Content="Выбрать изображение" 
+						Click="SelectImageButton_Click"/>
 
 				<Button 
 					Content="Подтвердить"

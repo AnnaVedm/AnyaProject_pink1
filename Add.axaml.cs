@@ -4,6 +4,7 @@ using Avalonia.Interactivity;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Bitmap = Avalonia.Media.Imaging.Bitmap;
 using Avalonia.Media;
 
 namespace AnyaProject
@@ -14,6 +15,7 @@ namespace AnyaProject
         //public List<Product> tovars2 = new List<Product>();
         //private User _user;
         private ProductsWindow1 _listupdate;
+        private Bitmap _selectedImage;  // ѕеременна€ дл€ хранени€ выбранного изображени€
 
         public Add()
         {
@@ -28,6 +30,24 @@ namespace AnyaProject
             //tovars2 = Tovars;
         }
 
+        private async void SelectImageButton_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog dialog = new OpenFileDialog();
+            dialog.Filters.Add(new FileDialogFilter() { Name = "Images", Extensions = { "png", "jpg", "jpeg", "bmp" } });
+
+            var selectedFiles = await dialog.ShowAsync(this);
+
+            if (selectedFiles != null && selectedFiles.Length > 0)
+            {
+                string imagePath = selectedFiles[0];
+                _selectedImage = new Bitmap(imagePath);
+
+                //var image = _listupdate.Tovarslistbox.FindControl<Image>("tovarImage");
+                ////    image.Source = new Bitmap(fileName);
+                //image.Source = _selectedImage;
+            }
+        }
+
         private void DobavitTovar_Button(object sender, RoutedEventArgs e)
         {
             Product product = new Product()
@@ -36,7 +56,8 @@ namespace AnyaProject
                 Manufacturer = TovarProizvoditel.Text,
                 Description = TovarOpisanie.Text,
                 Price = Convert.ToDouble(TovarPrice.Text),
-                Stock = Convert.ToInt32(TovarOstatok.Text)
+                Stock = Convert.ToInt32(TovarOstatok.Text),
+                TovarImage = _selectedImage
             };
 
             //tovars2.Add(product);

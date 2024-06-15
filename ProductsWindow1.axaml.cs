@@ -6,6 +6,7 @@ using Avalonia.Input;
 using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
 using Avalonia.Media;
+using Avalonia.Media.Imaging;
 using NAudio;
 using System;
 using System.Collections.Generic;
@@ -22,7 +23,7 @@ namespace AnyaProject
 
         //private static string _searchString = "";
         //public static List<string> Manufacturers = new List<string>() { "Все производители" };
-
+        public string fileName;
         private string _searchText = string.Empty;
         private string _sortCriteria = "Default";
         private string _selectedManufacturer = "Все производители";
@@ -159,43 +160,15 @@ namespace AnyaProject
 
             UpdateListBox(Product.ProductsList);
         }
-        /*private void ProizvoditeliList_SelectionChanged()
-        {
-            if (ProizvoditeliList.SelectedItem != null)
-            {
-                string selectedManufacturer = (ProizvoditeliList.SelectedItem as ComboBoxItem)?.Content.ToString();
 
-                Console.WriteLine($"Выбранный производитель: {selectedManufacturer}");
-
-                if (selectedManufacturer == "Все производители")
-                {
-                    UpdateListBox(Product.ProductsList);
-                }
-                else
-                {
-                    UpdateListBox(Product.ProductsList.Where(prod => prod.Manufacturer == selectedManufacturer).ToList());
-                }
-            }
-        }*/
-
-
-        //} 
-
-        // ЭТО ИЗНАЧАЛЬНЫЙ ВАРИАНТ-----------------------------------------------------------
-        //private void ProizvoditeliList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        //public async void DobavitPicture(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
         //{
-        //    ComboBox comboBox = (ComboBox)sender;
-        //    if (comboBox.SelectedItem != null)
-        //    {
-        //        string searchText = Search.Text.ToLower();
-        //        string selectedManufacturer = comboBox.SelectedItem?.ToString();
+        //    OpenFileDialog openFileDialog = new OpenFileDialog();
+        //    var topLevel = await openFileDialog.ShowAsync(this);
+        //    fileName = String.Join("", topLevel);
 
-        //        // Добавим отладочный вывод в стандартный вывод ошибок
-        //        Console.WriteLine($"Выбранный производитель: {selectedManufacturer}");
-        //        UpdateListWithSearchAndSort(searchText, selectedManufacturer, ProductsList);
-        //    }
-
-
+        //    var image = Tovarslistbox.FindControl<Image>("MyImage");
+        //    image.Source = new Bitmap(fileName);
         //}
 
         private void AddTovar_Button(object sender, RoutedEventArgs e)
@@ -312,25 +285,6 @@ namespace AnyaProject
             }
         }
 
-
-        /*private void UpdateListSearch(string searchText, List<Product> ProductsList)
-        {
-            string[] searchWords = searchText.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-            List<Product> filteredProducts = new List<Product>();
-
-            if (searchWords != null || searchWords.Length != 0)
-            {
-                filteredProducts = ProductsList.Where(product =>
-                string.IsNullOrWhiteSpace(searchText) ||
-                searchWords.Any(word =>
-                    product.TovarName.ToLower().Contains(word) ||
-                    product.Manufacturer.ToLower().Contains(word) ||
-                    product.Description.ToLower().Contains(word)
-                )).ToList();
-
-                UpdateListBox(filteredProducts);
-            }
-        }*/
 
         private void TextBox_TextChanged(object sender, KeyEventArgs e)
         {

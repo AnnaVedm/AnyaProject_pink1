@@ -105,20 +105,20 @@
 								<StackPanel
 								Orientation="Horizontal">
 									<Grid
-										ShowGridLines="True"
+										ShowGridLines="False"
 										ColumnDefinitions="200,300,150">
 										<!--Изображение товара-->
 										
 										<StackPanel Grid.Column="0">
 											<TextBlock Text="Изображение"/>
-											<Image>
+											<Image Name="tovarImage" Source="{Binding TovarImage}">
 
 											</Image>
 										</StackPanel>
 										
 										<StackPanel Grid.Column="1"
 											Orientation="Vertical">
-											<StackPanel
+											<StackPanel Margin="20 0 0 0"
 												Orientation="Vertical">
 												<!--Название товара через привязку-->
 												<TextBlock
@@ -135,7 +135,7 @@
 												<TextBlock
 													Text="{Binding Manufacturer}"/>
 											</StackPanel>
-											<StackPanel
+											<StackPanel Margin="20 0 0 0"
 												Orientation="Horizontal">
 												<TextBlock
 													Text="Стоимость: "/>

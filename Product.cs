@@ -1,5 +1,6 @@
 ﻿using Avalonia.Controls;
 using Avalonia.Media;
+using Avalonia.Media.Imaging;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -17,23 +18,12 @@ namespace AnyaProject
         private double _price;
         private bool _AddVKorzinuVisibility;
         private int _stock;
-        private string _tovarImagePath;
+        private Bitmap _tovarImage;
 
         private bool otobrazhenie;
 
         public static List<Product> ProductsList = new List<Product>();
-        public string TovarImage
-        {
-            get { return _tovarImagePath; }
-            set
-            {
-                if (_tovarImagePath != value)
-                {
-                    _tovarImagePath = value;
-                    OnPropertyChanged("TovarImage");
-                }
-            }
-        }
+       
         public bool AddVKorzinuVisibility
         {
             get { return _AddVKorzinuVisibility; }
@@ -119,6 +109,20 @@ namespace AnyaProject
                 {
                     _stock = value;
                     OnPropertyChanged("Stock");
+                }
+            }
+        }
+
+        //public string fileName { get; set; }
+        public Bitmap TovarImage
+        {
+            get { return _tovarImage; }
+            set
+            {
+                if (_tovarImage != value)
+                {
+                    _tovarImage = value;
+                    OnPropertyChanged("TovarImage");
                 }
             }
         }

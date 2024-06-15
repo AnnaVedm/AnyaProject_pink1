@@ -194,6 +194,7 @@ namespace AnyaProject
 
                     delete = false;
                     deletetovar(delete, product);
+                    break;
                 }
             }
 

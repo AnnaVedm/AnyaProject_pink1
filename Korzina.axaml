@@ -52,7 +52,7 @@
 
 								<StackPanel Grid.Column="0">
 									<TextBlock Text="Изображение"/>
-									<Image>
+									<Image Source="{Binding TovarImage}">
 
 									</Image>
 								</StackPanel>

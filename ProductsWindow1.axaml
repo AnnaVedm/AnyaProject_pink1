@@ -1,0 +1,226 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="500"
+		Width="800" Height="500"
+        x:Class="AnyaProject.ProductsWindow1"
+		CanResize="False"
+		x:CompileBindings="False"
+        Title="ProductsWindow1">
+
+		<Window.Background>
+			<LinearGradientBrush StartPoint="90%, 100%" EndPoint="0,1">
+				<GradientStop Color="#f700d2" Offset="0.2"/>
+				<GradientStop Color="#f70075" Offset="0.5"/>
+				<GradientStop Color="#f7004d" Offset="0.8"/>
+			</LinearGradientBrush>
+		</Window.Background>
+
+		<Grid ShowGridLines="True">
+			<Grid.RowDefinitions>
+				<RowDefinition Height="*"/>
+				<RowDefinition Height="*"/>
+				<RowDefinition Height="5*"/>
+				<RowDefinition Height="*"/>
+			</Grid.RowDefinitions>
+			
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="0.5*"/>
+				<ColumnDefinition Width="7*"/>
+				<ColumnDefinition Width="0.5*"/>
+			</Grid.ColumnDefinitions>
+
+			<!-- Поля: Имя пользователя и Статус -->
+			<StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="1">
+				<TextBlock Name="queenName"
+						   Foreground="White"
+						   HorizontalAlignment="Left"
+						   Margin = "0 20 0 0"
+						   FontWeight="ExtraBold"/>
+				<TextBlock Name="queenStatus"
+						   Foreground="White"
+						   FontWeight="ExtraBold"
+						   Margin="20 20 0 0"/>
+			</StackPanel>
+
+			<StackPanel Orientation="Horizontal"
+						Grid.Row="1" Grid.Column="1">
+				<Menu>
+					<MenuItem Header="Сортировать по..."
+							  Background="White"
+							  Foreground="#f7004d"
+							  CornerRadius="10"
+							  Margin="10 0 0 0">
+						<MenuItem Header="Цене (по убыванию)"
+								  Click="PriceUbivanie"/>
+						
+						<MenuItem Header="Цене (по возрастанию)"
+								  Click="PriceVozrastanie"/>
+						
+						<MenuItem Header="Производителю (по алфавиту)"
+								  Click="ProizvoditelAlfavit"/>
+						<MenuItem Header="Производителю (в обратном порядке)"
+								  />
+					</MenuItem>
+				</Menu>
+				<!--Производители для сортировки-->
+				<ComboBox Margin="10 16 0 0"	  
+						  CornerRadius="10"
+						  BorderBrush="White"
+						  SelectionChanged="ComboBox_SelectionChanged"
+						  BorderThickness="2"
+						  x:Name="ProizvoditeliList"
+						  SelectedIndex="0">
+					<ComboBoxItem>Все производители</ComboBoxItem>
+					<!--<ComboBoxItem>Все производители</ComboBoxItem> -->
+				</ComboBox>
+				<TextBox CornerRadius="20"
+						 Name="Find"
+						KeyUp="TextBox_TextChanged"
+						 Margin="10"
+						 Width="340"
+						 Height="30"
+						 Watermark="Начните искать..."
+						 />
+			</StackPanel>
+			
+
+			<!-- ListBox с товарами -->
+			<ScrollViewer HorizontalScrollBarVisibility="Visible"
+						  Grid.Row="2" Grid.Column="1">
+				<ListBox Grid.Row="2" Grid.Column="1" Margin="10"
+						 x:Name="Tovarslistbox"
+						 ScrollViewer.HorizontalScrollBarVisibility="Visible"
+						 ItemsSource="{Binding ShownProducts}"
+						 CornerRadius="15">
+
+					<ListBox.ItemTemplate>
+						<DataTemplate>
+							<!--Карточка товара-->
+							<StackPanel Orientation="Vertical"
+										x:Name="Kartochka_tovar"
+										Background="{Binding change_color}"
+										IsVisible="{Binding tovarsVisibility}">
+								<StackPanel
+								Orientation="Horizontal">
+									<Grid
+										ShowGridLines="True"
+										ColumnDefinitions="200,300,150">
+										<!--Изображение товара-->
+										
+										<StackPanel Grid.Column="0">
+											<TextBlock Text="Изображение"/>
+											<Image>
+
+											</Image>
+										</StackPanel>
+										
+										<StackPanel Grid.Column="1"
+											Orientation="Vertical">
+											<StackPanel
+												Orientation="Vertical">
+												<!--Название товара через привязку-->
+												<TextBlock
+													Text="{Binding TovarName}"
+													FontWeight="ExtraBold"/>
+												<TextBlock 
+													Text="{Binding Description}"
+													TextWrapping="Wrap"/>
+											</StackPanel>
+											<StackPanel
+												Orientation="Horizontal">
+												<TextBlock
+													Text="Производитель: "/>
+												<TextBlock
+													Text="{Binding Manufacturer}"/>
+											</StackPanel>
+											<StackPanel
+												Orientation="Horizontal">
+												<TextBlock
+													Text="Стоимость: "/>
+												<TextBlock
+													Text="{Binding Price}"/>
+											</StackPanel>
+										</StackPanel>
+										<StackPanel
+											Orientation="Vertical"
+											Grid.Column="2">
+											<TextBlock
+												Text="Наличие на складе: "/>
+											<TextBlock
+												Text="{Binding Stock}"
+												HorizontalAlignment="Center"/>
+										</StackPanel>
+									</Grid>
+								</StackPanel>
+
+								<StackPanel Orientation="Horizontal">
+									<Button Content="Редактировать" 
+											Margin="0 10 10 0"
+											IsVisible="{Binding Otobrazhenie}"
+											Click="RedactButton"
+											Background="#f7004d"
+											CornerRadius="21"
+											Foreground="White"/>
+									<Button Content="Удалить" 
+											Margin="0 10 10 0"
+											Background="#f7004d"
+											Click="DeleteTovar_Button"
+											IsVisible="{Binding Otobrazhenie}"
+											CornerRadius="20"
+											Foreground="White"/>
+									<Button Content="Добавить в корзину"
+											Click="DobavitKorzinu"
+											Margin="0 10 10 0"
+											Background="#f7004d"
+											CornerRadius="20"
+											IsVisible="{Binding AddVKorzinuVisibility}"
+											Foreground="White"/>
+								</StackPanel>
+							</StackPanel>
+						</DataTemplate>
+					</ListBox.ItemTemplate>
+				</ListBox>
+			</ScrollViewer>
+			
+
+			<!-- Кнопки: Добавить товар и Удалить выбранное -->
+			<StackPanel Grid.Row="3" Grid.Column="1" Orientation="Horizontal">
+				<Button Content="Добавить товар"
+						Name="DobavitTovar"
+						Click="AddTovar_Button"
+						FontSize="20"
+						Margin="10 0 0 0"
+						Background="White"
+						CornerRadius="20"
+						IsVisible="True"
+						Foreground="#f7004d"/>
+				
+				<Button Content="Перейти в корзину"
+						Click="PoitiKorzinu"
+						FontSize="20"
+						Margin="10 0 0 0"
+						Background="White"
+						CornerRadius="20"
+						IsVisible="True"
+						Foreground="#f7004d"/>
+				<!-- <Button Content="Удалить выбранное"
+						Name="DeleteVibrannoe"
+						IsVisible="True"
+						FontSize="20"
+						Margin="10 0 0 0"
+						Background="White"
+						CornerRadius="20"
+						Foreground="#f7004d"/> -->
+
+				<Button Content="Выход"
+						Click="Exit_ButtonClick"
+						FontSize="20"
+						Margin="200 0 0 0"
+						Background="White"
+						CornerRadius="20"
+						Foreground="#f7004d"/>
+			</StackPanel>
+		</Grid>
+</Window>

@@ -1,0 +1,146 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="500" d:DesignHeight="400"
+		Width="500"
+		Height="400"
+        x:Class="AnyaProject.Add"
+		CanResize="False"
+		x:CompileBindings="False"
+		Background="Transparent"
+        Title="Add">
+
+	<Window.Background>
+		<LinearGradientBrush StartPoint="90%, 100%" EndPoint="0,1">
+			<GradientStop Color="#f700d2" Offset="0.2"/>
+			<GradientStop Color="#f70075" Offset="0.5"/>
+			<GradientStop Color="#f7004d" Offset="0.8"/>
+		</LinearGradientBrush>
+	</Window.Background>
+
+	<Window.Styles>
+		<Style Selector="TextBlock.TaDaa">
+			<Setter Property="Foreground" Value="White"/>
+			<Setter Property="FontWeight" Value="ExtraBold"/>
+			<Setter Property="FontFamily" Value="nunito"/>
+		</Style>
+	</Window.Styles>
+
+	<Border CornerRadius="20">
+		<Grid ShowGridLines="True"
+			  RowDefinitions="1.5*, *, *, *, *, *, 1.5*"
+			  ColumnDefinitions="0.5*, 5*, 0.5*">
+
+			<StackPanel Grid.Row="0"
+						Grid.Column="1"
+						Orientation="Vertical"
+						HorizontalAlignment="Center">
+
+				<TextBlock Text="Добавить товар"
+						   Classes="TaDaa"
+						   FontSize="25"/>
+				<TextBlock Text="{Binding TovarName}"
+						   Name="tovarname"
+						   Classes="TaDaa"
+						   FontSize="20"
+						   HorizontalAlignment="Center"
+						   TextDecorations="underline"
+						   Margin="10 0 0 0"
+						   TextWrapping="Wrap"/>
+			</StackPanel>
+
+			<StackPanel Grid.Row="1" Grid.Column="1"
+						Orientation="Horizontal">
+				<TextBlock Text="Наименование: "
+						   Classes="TaDaa"
+						   FontSize="18"
+						   Margin="10 0 0 0"
+						   VerticalAlignment="Center"/>
+				<TextBox Width="210"
+						 Name="TovarName"
+						 Height="30"
+						 CornerRadius="10"/>
+			</StackPanel>
+
+			<StackPanel Grid.Row="2" Grid.Column="1"
+						Orientation="Horizontal">
+				<TextBlock Text="Производитель: "
+							Classes="TaDaa"
+							FontSize="17"
+							Margin="10 0 0 0"
+							VerticalAlignment="Center"/>
+				<TextBox Width="210"
+						 Name="TovarProizvoditel"
+						 Height="30"
+						 CornerRadius="10"/>
+			</StackPanel>
+
+			<StackPanel Grid.Row="3" Grid.Column="1"
+						Orientation="Horizontal">
+				<TextBlock Text="Описание: "
+						   Classes="TaDaa"
+						   FontSize="18"
+						   Margin="10 0 0 0"
+						   VerticalAlignment="Center"/>
+				<TextBox Width="210"
+						 Height="30"
+						 Name="TovarOpisanie"
+						 CornerRadius="10"
+						 Margin="48 0 0 0"/>
+			</StackPanel>
+
+			<StackPanel Grid.Row="4" Grid.Column="1"
+						Orientation="Horizontal">
+				
+				<TextBlock Text="Остаток: "
+						   Classes="TaDaa"
+						   FontSize="18"
+						   Margin="10 0 0 0"
+						   VerticalAlignment="Center"/>
+				
+				<TextBox Width="210"
+						 Height="30"
+						 Name="TovarOstatok"
+						 CornerRadius="10"
+						 Margin="65 0 0 0"/>
+			</StackPanel>
+
+			<StackPanel Grid.Row="5" Grid.Column="1"
+						Orientation="Horizontal">
+				<TextBlock Text="Стоимость: "
+						   Classes="TaDaa"
+						   FontSize="18"
+						   Margin="10 0 0 0"
+						   VerticalAlignment="Center"/>
+				<TextBox Width="210"
+						 Height="30"
+						 Name="TovarPrice"
+						 CornerRadius="10"
+						 Margin="40 0 0 0"/>
+			</StackPanel>
+
+			<TextBlock Text=""
+					   Name="TadaText"
+					   Grid.Row="6"
+					   Grid.Column="1"
+					   HorizontalAlignment="Right"
+					   Margin="0 30 10 0"
+					   Classes="TaDaa"
+					   FontSize="25"
+					   IsVisible="True"/>
+
+			<Button Grid.Row="6"
+					Grid.Column="1"
+					Content="Подтвердить"
+					Click="DobavitTovar_Button"
+					Foreground="#f700d2"
+					Background="White"
+					FontWeight="ExtraBold"
+					FontSize="20"
+					Margin="10 0 0 0"
+					CornerRadius="10"/>
+		</Grid>
+	</Border>
+  
+</Window>

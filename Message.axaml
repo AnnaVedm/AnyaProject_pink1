@@ -1,0 +1,33 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="300" d:DesignHeight="120"
+		Height="120" Width="300"
+        x:Class="AnyaProject.Message"
+		x:CompileBindings="False"
+		CanResize="False"
+		Background="Transparent"
+		CornerRadius="20"
+        Title="Message"
+		WindowStartupLocation="CenterOwner">
+	<Window.Background>
+		<LinearGradientBrush StartPoint="90%, 100%" EndPoint="0,1">
+			<GradientStop Color="#f700d2" Offset="0.2"/>
+			<GradientStop Color="#f70075" Offset="0.5"/>
+			<GradientStop Color="#f7004d" Offset="0.8"/>
+		</LinearGradientBrush>
+	</Window.Background>
+		<Border CornerRadius="20">
+			<Grid>
+			<TextBlock Name="oshibka1"
+					   Text=""
+					   TextWrapping="Wrap"
+					   HorizontalAlignment="Center"
+					   FontFamily="Oswald"
+					   FontSize="19"
+					   FontWeight="Bold"
+					   Foreground="White"/>
+			</Grid>
+		</Border>
+</Window>

@@ -1,0 +1,113 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+		Width="800" Height="500"
+        x:Class="AnyaProject.Korzina"
+        Title="Korzina"
+		x:CompileBindings="False"
+		CanResize="False"
+		Background="Transparent"
+		CornerRadius="20">
+	
+	<Window.Background>
+		<LinearGradientBrush StartPoint="90%, 100%" EndPoint="0,1">
+			<GradientStop Color="#f700d2" Offset="0.2"/>
+			<GradientStop Color="#f70075" Offset="0.5"/>
+			<GradientStop Color="#f7004d" Offset="0.8"/>
+		</LinearGradientBrush>
+	</Window.Background>
+	<Border>
+		<Grid ShowGridLines="True"
+			  RowDefinitions="3*,9,20*,65">
+			<TextBlock Grid.Row="0"
+					   FontSize="40"
+					   FontWeight="ExtraBold"
+					   HorizontalAlignment="Center"
+					   Foreground="White">
+				- Корзина -
+			</TextBlock>
+	<ScrollViewer HorizontalScrollBarVisibility="Visible"
+					  Grid.Row="2" Grid.Column="1">
+		<ListBox Grid.Row="2" Grid.Column="1" Margin="10"
+				 x:Name="Tovarslistbox_Korzina"
+				 ScrollViewer.HorizontalScrollBarVisibility="Visible"
+				 CornerRadius="15">
+
+			<ListBox.ItemTemplate>
+				<DataTemplate>
+					
+					<!--Карточка товара-->
+					<StackPanel Orientation="Vertical"
+								x:Name="Kartochka_tovar"
+								Background="{Binding change_color}"
+								IsVisible="{Binding tovarsVisibility}">
+						<StackPanel
+						Orientation="Horizontal">
+							<Grid
+								ShowGridLines="True"
+								ColumnDefinitions="200,300,150">
+								<!--Изображение товара-->
+
+								<StackPanel Grid.Column="0">
+									<TextBlock Text="Изображение"/>
+									<Image>
+
+									</Image>
+								</StackPanel>
+
+								<StackPanel Grid.Column="1"
+									Orientation="Vertical">
+									<StackPanel
+										Orientation="Vertical">
+										<!--Название товара через привязку-->
+										<TextBlock
+											Text="{Binding TovarName}"
+											FontWeight="ExtraBold"/>
+										<TextBlock
+											Text="{Binding Description}"
+											TextWrapping="Wrap"/>
+									</StackPanel>
+									<StackPanel
+										Orientation="Horizontal">
+										<TextBlock
+											Text="Производитель: "/>
+										<TextBlock
+											Text="{Binding Manufacturer}"/>
+									</StackPanel>
+									<StackPanel
+										Orientation="Horizontal">
+										<TextBlock
+											Text="Стоимость: "/>
+										<TextBlock
+											Text="{Binding Price}"/>
+									</StackPanel>
+								</StackPanel>
+								<StackPanel
+									Orientation="Vertical"
+									Grid.Column="2">
+									<TextBlock
+										Text="Наличие на складе: "/>
+									<TextBlock
+										Text="{Binding Stock}"
+										HorizontalAlignment="Center"/>
+								</StackPanel>
+							</Grid>
+						</StackPanel>
+							<Button Content="Удалить" Margin="0 10 10 0"
+									Click="dropiskorzina"
+									Background="#f7004d"
+									IsVisible="{Binding AddVKorzinuVisibility}"
+									CornerRadius="20"
+									Foreground="White"/>
+						</StackPanel>
+				</DataTemplate>
+			</ListBox.ItemTemplate>
+		</ListBox>
+	</ScrollViewer>
+			<StackPanel Grid.Row="3" Grid.Column="1" Orientation="Horizontal">
+			</StackPanel>
+			</Grid>
+	</Border>
+</Window>

@@ -1,0 +1,91 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="500" d:DesignHeight="400"
+		Width="500" Height="400"
+		x:CompileBindings="False"
+        x:Class="AnyaProject.MainWindow"
+		CanResize="False"
+		Background="Transparent"
+        Title="AnyaProject">
+
+	<Window.Styles>
+		<Style Selector="TextBlock.text">
+			<Setter Property="Foreground" Value="White"/>
+			<Setter Property="FontFamily" Value="nunito"/>
+			<Setter Property="FontWeight" Value="ExtraBold"/>
+		</Style>
+
+		<Style Selector="Button.knopka">
+			<Setter Property="Background" Value="White"/>
+			<Setter Property="Foreground" Value="#f700d2"/>
+			<Setter Property="CornerRadius" Value="10"/>
+			<Setter Property="FontSize" Value="20"/>
+			<Setter Property="FontFamily" Value="nunito"/>
+			<Setter Property="FontWeight" Value="ExtraBold"/>
+		</Style>
+	</Window.Styles>
+	
+	<Border CornerRadius="20">
+		<Border.Background>
+			<LinearGradientBrush StartPoint="90%, 100%" EndPoint="1,1">
+				<GradientStop Color="#f700d2" Offset="0.2"/>
+				<GradientStop Color="#f70075" Offset="0.5"/>
+				<GradientStop Color="#f7004d" Offset="0.8"/>
+			</LinearGradientBrush>
+		</Border.Background>
+
+		<Grid ShowGridLines="False" RowDefinitions="1.5*, 2*, *"
+			  ColumnDefinitions="*, 6*,*">
+
+		
+			
+			<StackPanel Grid.Row="0" Grid.Column="1"
+						VerticalAlignment="Center">
+				<TextBlock Text="Авторизация"
+						   Classes="text"
+						   HorizontalAlignment="Center"
+						   FontSize="40"/>
+
+				<TextBlock Text="Скорее! ЛАШАДКИ вас уже ждут!"
+						   Classes="text"
+						   HorizontalAlignment="Center"
+						   FontSize="15"/>
+			</StackPanel>
+
+			<StackPanel Grid.Row="1" Grid.Column="1">
+				<TextBox Watermark="Логин или имя пользователя"
+						 Name="Name"
+						 Margin="10 30 10 0" CornerRadius="10"
+						 Height="40"/>
+
+				<TextBox Watermark="Пароль"
+						 Name="Password"
+						 Margin="10 30 10 0" CornerRadius="10"
+						 Height="40"
+						 PasswordChar="*"/>
+				
+				<TextBlock Name="Oshibka"
+						   Foreground="White"
+						   FontSize="15"
+						   TextWrapping="Wrap"/>
+
+			</StackPanel>
+
+			<StackPanel Grid.Row="2" Grid.Column="1"
+						Orientation="Vertical">
+				<Button Content="Войти"
+						Click="VoitiVAkkaynt"
+						Margin="150 0 0 0"
+						Classes="knopka"/>
+
+				<Button Content="Войти как гость"
+						Click="Guest_Button"
+						Margin="100 5 0 0"
+						Classes="knopka"/>
+			</StackPanel>
+			
+		</Grid>
+	</Border>
+</Window>

@@ -14,6 +14,7 @@ namespace AnyaProject
         private Product _tovar;
         private ProductsWindow1 tovar1;
         private Bitmap _selectedImage1;
+        private ComboBox _combobox;
 
         private async void SelectImageButton_Click1(object sender, RoutedEventArgs e)
         {
@@ -37,13 +38,13 @@ namespace AnyaProject
             InitializeComponent();
         }
 
-        public Redactirovanie(Product tovar, ProductsWindow1 pomogite, List<Product> spisok)
+        public Redactirovanie(Product tovar, ProductsWindow1 pomogite, ComboBox combobox)
         {
-            spisok1 = spisok;
             tovar1 = pomogite;
             _tovar = tovar;
             InitializeComponent();
             DataContext = tovar;
+            _combobox = combobox;
         }
 
         private void ApplyRedactirovanie(object sender, RoutedEventArgs e)
@@ -78,9 +79,10 @@ namespace AnyaProject
             TadaText.Text = "ТА - ДА!";
 
             //ДОБАВИЛИ ОЧИЩЕНИЕ СПИСКА
-            Product.ProductsList.Clear();
+            ProductsWindow1.comboboxFill(Product.ProductsList, _combobox);
 
-            foreach (var tovar in spisok1)
+            ProductsWindow1.ShownProducts.Clear();
+            foreach (var tovar in Product.ProductsList)
             {
                 if (tovar.Stock == 0)
                 {
@@ -90,7 +92,7 @@ namespace AnyaProject
                 {
                     tovar.change_color = new SolidColorBrush(Colors.White);
                 }
-               Product.ProductsList.Add(tovar);
+                ProductsWindow1.ShownProducts.Add(tovar);
             }
 
             Close(); // Закрываем окно после применения изменений

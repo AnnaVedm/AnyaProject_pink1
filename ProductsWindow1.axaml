@@ -61,7 +61,7 @@
 						<MenuItem Header="Производителю (по алфавиту)"
 								  Click="ProizvoditelAlfavit"/>
 						<MenuItem Header="Производителю (в обратном порядке)"
-								  />
+								  Click="ProizvoditelObratno"/>
 					</MenuItem>
 				</Menu>
 				<!--Производители для сортировки-->

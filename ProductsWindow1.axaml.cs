@@ -47,7 +47,7 @@ namespace AnyaProject
             var comboBox = this.FindControl<ComboBox>("ProizvoditeliList");
             _comboBox = comboBox;
 
-            comboboxFill(_comboBox);
+            comboboxFill(Product.ProductsList, _comboBox);
             //InitializeComboBox();
 
             ApplyFiltersAndSort();
@@ -117,9 +117,13 @@ namespace AnyaProject
         //    _comboBox.SelectedIndex = 0;
         //}
 
-        private void comboboxFill(ComboBox _combobox)
+        public static void comboboxFill(List<Product> Products, ComboBox _comboBox)
         {
-            foreach (var item in Product.ProductsList)
+            _comboBox.Items.Clear();
+            _comboBox.Items.Add(new ComboBoxItem { Content = "Все производители" });
+            _comboBox.SelectedIndex = 0;
+
+            foreach (var item in Products)
             {
                 string manufacturer = item.Manufacturer;
 
@@ -214,7 +218,7 @@ namespace AnyaProject
         {
             Button edittovar = (Button)sender;
             Product editTovar = (Product)edittovar.DataContext;
-            Redactirovanie tovar = new Redactirovanie(editTovar, this, Product.ProductsList);
+            Redactirovanie tovar = new Redactirovanie(editTovar, this, _comboBox);
             tovar.Show();
         }
 
@@ -262,12 +266,12 @@ namespace AnyaProject
             //UpdateListWithSearchAndSort(Search.Text.ToLower(), null, SortedList);
         }
 
-        /*private void ProizvoditelObratno(object sender, RoutedEventArgs e)
+        private void ProizvoditelObratno(object sender, RoutedEventArgs e)
         {
-            List<Product> SortedList = Product.ProductsList.OrderByDescending(item => item.Manufacturer).ToList();
-            UpdateListBox(SortedList);
-            //UpdateListWithSearchAndSort(Search.Text.ToLower(), null, SortedList);
-        }*/
+            _sortCriteria = "ManufacturerObratno";
+            ApplyFiltersAndSort();
+
+        }
 
         private void Exit_ButtonClick(object sender, RoutedEventArgs e)
         {
@@ -315,6 +319,9 @@ namespace AnyaProject
                     break;
                 case "Manufacturer":
                     sortedProducts = filteredProducts.OrderBy(item => item.Manufacturer).ToList();
+                    break;
+                case "ManufacturerObratno":
+                    sortedProducts = filteredProducts.OrderByDescending(item => item.Manufacturer).ToList();
                     break;
                 default:
                     sortedProducts = filteredProducts.ToList();

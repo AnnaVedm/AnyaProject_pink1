@@ -15,6 +15,8 @@ namespace AnyaProject
         private ProductsWindow1 tovar1;
         private Bitmap _selectedImage1;
         private ComboBox _combobox;
+        public Bitmap _selectedImage;  // Переменная для хранения выбранного изображения
+        private Bitmap _originalImage; // Переменная для хранения оригинального изображения
 
         private async void SelectImageButton_Click1(object sender, RoutedEventArgs e)
         {
@@ -28,9 +30,12 @@ namespace AnyaProject
                 string imagePath = selectedFiles[0];
                 _selectedImage1 = new Bitmap(imagePath);
 
-                //var image = _listupdate.Tovarslistbox.FindControl<Image>("tovarImage");
-                ////    image.Source = new Bitmap(fileName);
-                //image.Source = _selectedImage;
+                // Найти элемент Image и обновить его источник (Source)
+                var imageControl = this.FindControl<Image>("SelectedImage");
+                if (imageControl != null)
+                {
+                    imageControl.Source = _selectedImage1;
+                }
             }
         }
         public Redactirovanie()

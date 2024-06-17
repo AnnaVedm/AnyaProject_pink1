@@ -42,9 +42,12 @@ namespace AnyaProject
                 string imagePath = selectedFiles[0];
                 _selectedImage = new Bitmap(imagePath);
 
-                //var image = _listupdate.Tovarslistbox.FindControl<Image>("tovarImage");
-                ////    image.Source = new Bitmap(fileName);
-                //image.Source = _selectedImage;
+                // Найти элемент Image и обновить его источник (Source)
+                var imageControl = this.FindControl<Image>("SelectedImage");
+                if (imageControl != null)
+                {
+                    imageControl.Source = _selectedImage;
+                }
             }
         }
 

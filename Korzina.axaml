@@ -19,8 +19,7 @@
 		</LinearGradientBrush>
 	</Window.Background>
 	<Border>
-		<Grid ShowGridLines="True"
-			  RowDefinitions="3*,9,20*,65">
+		<Grid RowDefinitions="3*,9,20*,65">
 			<TextBlock Grid.Row="0"
 					   FontSize="40"
 					   FontWeight="ExtraBold"
@@ -45,9 +44,7 @@
 								IsVisible="{Binding tovarsVisibility}">
 						<StackPanel
 						Orientation="Horizontal">
-							<Grid
-								ShowGridLines="True"
-								ColumnDefinitions="200,300,150">
+							<Grid ColumnDefinitions="200,300,150">
 								<!--Изображение товара-->
 
 								<StackPanel Grid.Column="0">

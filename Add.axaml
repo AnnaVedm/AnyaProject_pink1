@@ -28,8 +28,7 @@
 	</Window.Styles>
 
 	<Border CornerRadius="20">
-		<Grid ShowGridLines="True"
-			  RowDefinitions="1.5*, *, *, *, *, *, 1.5*"
+		<Grid RowDefinitions="1.5*, *, *, *, *, *, 1.5*"
 			  ColumnDefinitions="0.5*, 5*, 0.5*">
 
 			<StackPanel Grid.Row="0"

@@ -17,7 +17,7 @@
 			</LinearGradientBrush>
 		</Window.Background>
 
-		<Grid ShowGridLines="True">
+		<Grid>
 			<Grid.RowDefinitions>
 				<RowDefinition Height="*"/>
 				<RowDefinition Height="*"/>

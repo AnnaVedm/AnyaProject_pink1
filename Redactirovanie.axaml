@@ -27,7 +27,7 @@
 	</Window.Styles>
 	
 	<Border CornerRadius="20">
-		<Grid ShowGridLines="True"
+		<Grid ShowGridLines="False"
 			  RowDefinitions="1.5*, *, *, *, *, *, 1.5*"
 			ColumnDefinitions="0.5*, 4*, 3*, 0.5*">
 		

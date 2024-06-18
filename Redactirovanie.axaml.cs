@@ -1,22 +1,40 @@
 using Avalonia.Controls;
 using Avalonia.Interactivity;
-using System;
 using Avalonia.Media;
-using System.Collections.Generic;
 using Avalonia.Media.Imaging;
-using Bitmap = Avalonia.Media.Imaging.Bitmap;
+using System;
+using System.Collections.Generic;
 
 namespace AnyaProject
 {
     public partial class Redactirovanie : Window
     {
-        private List<Product> spisok1 = new List<Product>();
         private Product _tovar;
-        private ProductsWindow1 tovar1;
-        private Bitmap _selectedImage1;
         private ComboBox _combobox;
-        public Bitmap _selectedImage;  // Переменная для хранения выбранного изображения
-        private Bitmap _originalImage; // Переменная для хранения оригинального изображения
+        private Bitmap _selectedImage1;
+        private Bitmap _originalImage;
+
+        public Redactirovanie()
+        {
+            InitializeComponent();
+        }
+
+        public Redactirovanie(Product tovar, ProductsWindow1 pomogite, ComboBox combobox) : this()
+        {
+            _tovar = tovar;
+            DataContext = tovar;
+            _combobox = combobox;
+
+            // Показываем текущее изображение товара при открытии окна
+            if (_tovar.TovarImage != null)
+            {
+                var imageControl = this.FindControl<Image>("SelectedImage");
+                if (imageControl != null)
+                {
+                    imageControl.Source = _tovar.TovarImage;
+                }
+            }
+        }
 
         private async void SelectImageButton_Click1(object sender, RoutedEventArgs e)
         {
@@ -30,7 +48,7 @@ namespace AnyaProject
                 string imagePath = selectedFiles[0];
                 _selectedImage1 = new Bitmap(imagePath);
 
-                // Найти элемент Image и обновить его источник (Source)
+                // Обновляем элемент управления изображением выбранным изображением
                 var imageControl = this.FindControl<Image>("SelectedImage");
                 if (imageControl != null)
                 {
@@ -38,23 +56,10 @@ namespace AnyaProject
                 }
             }
         }
-        public Redactirovanie()
-        {
-            InitializeComponent();
-        }
-
-        public Redactirovanie(Product tovar, ProductsWindow1 pomogite, ComboBox combobox)
-        {
-            tovar1 = pomogite;
-            _tovar = tovar;
-            InitializeComponent();
-            DataContext = tovar;
-            _combobox = combobox;
-        }
 
         private void ApplyRedactirovanie(object sender, RoutedEventArgs e)
         {
-            if (!string.IsNullOrWhiteSpace(TovarName.Text)) //если наша строка непустая
+            if (!string.IsNullOrWhiteSpace(TovarName.Text))
             {
                 _tovar.TovarName = TovarName.Text;
             }
@@ -62,7 +67,6 @@ namespace AnyaProject
             {
                 _tovar.Manufacturer = TovarProizvoditel.Text;
             }
-
             if (!string.IsNullOrWhiteSpace(TovarOpisanie.Text))
             {
                 _tovar.Description = TovarOpisanie.Text;
@@ -76,6 +80,8 @@ namespace AnyaProject
                 _tovar.Price = Convert.ToDouble(TovarPrice.Text);
             }
 
+            // Если выбрано новое изображение, устанавливаем его
+            // В противном случае оставляем текущее изображение товара
             if (_selectedImage1 != null)
             {
                 _tovar.TovarImage = _selectedImage1;
@@ -83,10 +89,13 @@ namespace AnyaProject
 
             TadaText.Text = "ТА - ДА!";
 
-            //ДОБАВИЛИ ОЧИЩЕНИЕ СПИСКА
+            // Обновляем список товаров и их отображение в комбобоксе
             ProductsWindow1.comboboxFill(Product.ProductsList, _combobox);
 
+            // Очищаем список отображаемых товаров
             ProductsWindow1.ShownProducts.Clear();
+
+            // Проходим по всем товарам и устанавливаем цвет в зависимости от наличия товара
             foreach (var tovar in Product.ProductsList)
             {
                 if (tovar.Stock == 0)
@@ -97,10 +106,12 @@ namespace AnyaProject
                 {
                     tovar.change_color = new SolidColorBrush(Colors.White);
                 }
+                // Добавляем товар в список отображаемых товаров
                 ProductsWindow1.ShownProducts.Add(tovar);
             }
 
-            Close(); // Закрываем окно после применения изменений
+            // Закрываем окно после применения изменений
+            Close();
         }
     }
 }
